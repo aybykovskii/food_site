@@ -1,6 +1,6 @@
 "use strict";
 document.addEventListener('DOMContentLoaded', () => {
-
+    //Tabs
     const tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent =document.querySelectorAll('.tabcontent'),
           tabsParent = document.querySelector('.tabheader__items');
@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
+    {
+        //Calculating
      const people = document.querySelectorAll('.calculating__choose-item'),
           calculatingResult = document.querySelector('.calculating__result'),
           names = document.querySelectorAll('.order__input'),
@@ -115,11 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         high.classList.add('calculating__choose-item_active');
         calculating();
     })
-//     Формула для мужчин:
-// BMR = 88,36 + (13,4 × вес в кг) + (4,8 × рост в см) – (5,7 × возраст в годах).
 
-// Формула для женщин:
-// BMR = 447,6 + (9,2 × вес в кг) + (3,1 × рост в см) – (4,3 × возраст в годах).
     let calculating = function(){
     let kkal;
     if(woman.classList.contains('calculating__choose-item_active')){
@@ -139,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     calculatingResult.textContent = `${kkal} ккал`;
 }
 
+    //Recall
     recallBtn.addEventListener('click', (e) => {
         e.preventDefault();
         if(name.value && phoneNumber.value){
@@ -146,4 +144,58 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Твой номер телефона: ${phoneNumber.value}`);
         }
     })
+    }
+    //Timer
+
+    const deadline = new Date('2020-05-31');
+
+    function getTimeRemaining(endtime){
+        let t = Date.parse(endtime) - Date.parse(new Date()),
+        days = Math.floor(t/(1000 * 60 * 60 * 24)),
+        hours = Math.floor((t/(1000 * 60 * 60)) % 24),
+        minutes = Math.floor((t/(1000 * 60)) % 60),
+        seconds = Math.floor((t/1000) % 60);
+
+        return {
+            'total' : t,
+            'days' : days,
+            'hours' : hours,
+            'minutes' : minutes,
+            'seconds' : seconds
+        };
+    }
+
+    function setClock(selector, endtime){
+        const timer = document.querySelector(selector),
+              days = timer.querySelector('#days'),
+              hours = timer.querySelector('#hours'),
+              minutes = timer.querySelector('#minutes'),
+              seconds = timer.querySelector('#seconds'),
+              timeInterval = setInterval(updateClock, 1000);
+        
+        updateClock();
+
+        function getZero(num){
+            if(num >= 0 && num < 10){
+                return `0${num}`;
+            } else return num;
+        }
+        function updateClock() {
+            const t = getTimeRemaining(endtime);
+
+            days.textContent = getZero(t.days);
+            hours.textContent = getZero(t.hours);
+            minutes.textContent = getZero(t.minutes);
+            seconds.textContent = getZero(t.seconds);
+
+            if(t.total <= 0){
+                clearInterval(timeInterval);
+            }
+        }
+    }
+    setClock(".timer", deadline);
+
+    const timerEndTime = document.querySelector('.deadline');
+    timerEndTime.textContent = `Акция закончится ${deadline.getDate()} мая ${deadline.getFullYear()} года в ${deadline.getHours()} часов 00 минут`;
+
 });
