@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     //Timer
 
-    const deadline = new Date('2020-05-31');
+    const deadline = new Date('2020-06-02');
 
     function getTimeRemaining(endtime){
         let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -194,8 +194,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     setClock(".timer", deadline);
-
     const timerEndTime = document.querySelector('.deadline');
-    timerEndTime.textContent = `Акция закончится ${deadline.getDate()} мая ${deadline.getFullYear()} года в ${deadline.getHours()} часов 00 минут`;
+    timerEndTime.textContent = `Акция закончится ${deadline.getDate()} июня ${deadline.getFullYear()} года в ${deadline.getHours()} часов 00 минут`;
+
+
+    const slides = document.querySelectorAll('.offer__slide'),
+          offerSliderCounter = document.querySelector('.offer__slider-counter'),
+          total = offerSliderCounter.querySelector('#total'),
+          current = offerSliderCounter.querySelector('#current'),
+          prevBtn = offerSliderCounter.querySelector('.offer__slider-prev'),
+          netxBtn = offerSliderCounter.querySelector('.offer__slider-next');
+    console.log(slides);
+    slides.forEach((item, i) => {
+        if(i!= 3){
+            item.classList.add('hide');
+        } else {
+            current.textContent = '0' + (1+i);
+        }
+    })
+    prevBtn.addEventListener('click', () => {
+        let numI;
+        slides.forEach((e, i) => {
+            if(!e.classList.contains('hide')){
+                numI = i;
+            }
+        })
+        if(numI > 0){
+            slides[numI].classList.add('hide');
+            numI--;
+            slides[numI].classList.remove('hide');
+            current.textContent = `0${numI + 1}`;
+        }
+    })
+
+    netxBtn.addEventListener('click', () => {
+        let numI;
+        slides.forEach((e, i) => {
+            if(!e.classList.contains('hide')){
+                numI = i;
+            }
+        })
+        console.log(numI);
+        if(numI < 3){
+            slides[numI].classList.add('hide');
+            numI++;
+            slides[numI].classList.remove('hide');
+            current.textContent = `0${numI + 1}`;
+        }
+    })
+
+    const pepperBtn = document.querySelector('.pepper');
+    pepperBtn.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+    })
+
 
 });
