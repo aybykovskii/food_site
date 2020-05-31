@@ -254,12 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn = modal.querySelector('button'),
           modalInput = modal.querySelectorAll('.modal__input');
 
+    function openModal() {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        clearInterval(modatTimerId);
+    }
     modalTrigger.forEach((item) =>{
-        item.addEventListener('click', () => {
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        })
+        item.addEventListener('click', openModal);
     })
+    const modatTimerId = setInterval(openModal, 15000);
+
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         modalInput.forEach(e => {
@@ -286,5 +290,14 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     })
+
+    function openModalByScroll () {
+        if(window.pageYOffset + document.documentElement.clientHeight >= document.
+            documentElement.scrollHeight){
+            openModal();
+            window.removeEventListener('scroll', openModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', openModalByScroll);
 
 });
