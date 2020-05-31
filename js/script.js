@@ -140,11 +140,16 @@ document.addEventListener('DOMContentLoaded', () => {
     recallBtn.addEventListener('click', (e) => {
         e.preventDefault();
         if(name.value && phoneNumber.value){
-            alert(`Привет, ${name.value}`);
-            alert(`Твой номер телефона: ${phoneNumber.value}`);
+            console.log(name.value, phoneNumber.value);
         }
     })
     }
+
+    document.addEventListener('keydown', (e) => {
+        if(e.code === "Enter" && name.value && phoneNumber.value){
+            console.log(name.value, phoneNumber.value);
+        }
+    })
     //Timer
 
     const deadline = new Date('2020-06-02');
@@ -248,5 +253,43 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
     })
 
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+          modalClose = document.querySelector('[data-close]'),
+          modal = document.querySelector('.modal'),
+          submitBtn = modal.querySelector('button'),
+          modalInput = modal.querySelectorAll('.modal__input');
+
+    modalTrigger.forEach((item) =>{
+        item.addEventListener('click', () => {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        })
+    })
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalInput.forEach(e => {
+            console.log(e.value);
+        })
+    })
+    function closeModal () {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    modalClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal();
+    })
+
+    modal.addEventListener('click', e => {
+        if(e.target === modal){
+            closeModal();
+        }
+    })
+
+    document.addEventListener('keydown', (e) => {
+        if(e.code === "Escape" && modal.classList.contains('show')){
+            closeModal();
+        }
+    })
 
 });
