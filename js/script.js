@@ -61,9 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
            
 
      woman.addEventListener('click',(event) => {
-         chooseItemActive(man,' ', ' ', woman);
-        //  man.classList.remove('calculating__choose-item_active');
-        //  woman.classList.add('calculating__choose-item_active');
+         man.classList.remove('calculating__choose-item_active');
+         woman.classList.add('calculating__choose-item_active');
          calculating();
      })
     man.addEventListener('click',(event) => {
