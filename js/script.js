@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
            
 
      woman.addEventListener('click',(event) => {
-         man.classList.remove('calculating__choose-item_active');
-         woman.classList.add('calculating__choose-item_active');
+         chooseItemActive(man,' ', ' ', woman);
+        //  man.classList.remove('calculating__choose-item_active');
+        //  woman.classList.add('calculating__choose-item_active');
          calculating();
      })
     man.addEventListener('click',(event) => {
@@ -88,32 +89,27 @@ document.addEventListener('DOMContentLoaded', () => {
             calculating();
         })
     })
-    low.addEventListener('click',(event) => {
-        small.classList.remove('calculating__choose-item_active');
-        medium.classList.remove('calculating__choose-item_active');
-        high.classList.remove('calculating__choose-item_active');
-        low.classList.add('calculating__choose-item_active');
+
+    function chooseItemActive(remove1, remove2, remove3, add1){
+        remove1.classList.remove('calculating__choose-item_active');
+        remove2.classList.remove('calculating__choose-item_active');
+        remove3.classList.remove('calculating__choose-item_active');
+        add1.classList.add('calculating__choose-item_active');
+    }
+    low.addEventListener('click',() => {
+        chooseItemActive(small, medium, high, low);
         calculating();
     })
-    small.addEventListener('click',(event) => {
-        low.classList.remove('calculating__choose-item_active');
-        medium.classList.remove('calculating__choose-item_active');
-        high.classList.remove('calculating__choose-item_active');
-        small.classList.add('calculating__choose-item_active');
+    small.addEventListener('click',() => {
+        chooseItemActive(low, medium, high, small);
         calculating();
     })
-    medium.addEventListener('click',(event) => {
-        small.classList.remove('calculating__choose-item_active');
-        low.classList.remove('calculating__choose-item_active');
-        high.classList.remove('calculating__choose-item_active');
-        medium.classList.add('calculating__choose-item_active');
+    medium.addEventListener('click',() => {
+        chooseItemActive(low, small, high, medium);
         calculating();
     })
-    high.addEventListener('click',(event) => {
-        small.classList.remove('calculating__choose-item_active');
-        medium.classList.remove('calculating__choose-item_active');
-        low.classList.remove('calculating__choose-item_active');
-        high.classList.add('calculating__choose-item_active');
+    high.addEventListener('click',() => {
+        chooseItemActive(low, small, medium, high);
         calculating();
     })
 
