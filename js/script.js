@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
         //Calculating
      const people = document.querySelectorAll('.calculating__choose-item'),
-          calculatingResult = document.querySelector('.calculating__result'),
-          names = document.querySelectorAll('.order__input'),
-          reCall = document.querySelectorAll('.btn_dark');
+          calculatingResult = document.querySelector('.calculating__result');
      const woman = people[0],
            man = people[1],
            height = people[2],
@@ -53,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
            small = people[6],
            medium = people[7],
            high = people[8];
-     const name = names[0],
-           phoneNumber = names[1],
-           recallBtn = reCall[1];
            
 
      woman.addEventListener('click',(event) => {
@@ -128,21 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     calculatingResult.textContent = `${kkal} ккал`;
 }
-
-    //Recall
-    recallBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if(name.value && phoneNumber.value){
-            console.log(name.value, phoneNumber.value);
-        }
-    })
     }
 
-    document.addEventListener('keydown', (e) => {
-        if(e.code === "Enter" && name.value && phoneNumber.value){
-            console.log(name.value, phoneNumber.value);
-        }
-    })
+
     //Timer
 
     const deadline = new Date('2020-06-02');
@@ -195,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerEndTime = document.querySelector('.deadline');
     timerEndTime.textContent = `Акция закончится ${deadline.getDate()} июня ${deadline.getFullYear()} года в ${deadline.getHours()} часов 00 минут`;
 
-
+    //slider
     const slides = document.querySelectorAll('.offer__slide'),
           offerSliderCounter = document.querySelector('.offer__slider-counter'),
           total = offerSliderCounter.querySelector('#total'),
@@ -246,9 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
           modalClose = document.querySelector('[data-close]'),
-          modal = document.querySelector('.modal'),
-          submitBtn = modal.querySelector('button'),
-          modalInput = modal.querySelectorAll('.modal__input');
+          modal = document.querySelector('.modal');
 
     function openModal() {
         modal.classList.add('show');
@@ -259,13 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', openModal);
     })
     const modatTimerId = setInterval(openModal, 15000);
-
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        modalInput.forEach(e => {
-            console.log(e.value);
-        })
-    })
     function closeModal () {
         modal.classList.remove('show');
         document.body.style.overflow = '';
@@ -377,4 +351,55 @@ document.addEventListener('DOMContentLoaded', () => {
     footerInsBtn.addEventListener('click', () => {
         document.location.href = "https://www.instagram.com/vvcigy/";
     })
+
+    //Forms
+    const forms = document.querySelectorAll('form');
+    const message = {
+        loading: 'Загрузка',
+        success: 'Спасибо! Скоро мы с вами свяжемся!',
+        fail: 'Что то пошло не так'
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    })
+
+    function postData (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+
+            request.setRequestHeader('Content-type', 'application/json');
+            const formData = new FormData(form);
+
+            const object = {};
+            formData.forEach(function(value, key){
+                object[key] = value;
+            });
+
+            const json = JSON.stringify(object);
+
+            request.send(json);
+
+            request.addEventListener('load', () => {
+                if(request.status === 200){
+                    console.log(request.response);
+                    statusMessage.textContent = message.success;
+                    form.reset();
+                    setInterval(()=>{
+                        statusMessage.remove();
+                    }, 2000);
+                } else {
+                    statusMessage.textContent = message.fail;
+                }
+            });
+        })
+    }
 });
