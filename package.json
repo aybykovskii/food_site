@@ -1,0 +1,22 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvcigy/food_site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvcigy/food_site/issues"
+  },
+  "homepage": "https://github.com/vvcigy/food_site#readme",
+  "devDependencies": {
+    "json-server": "^0.16.1"
+  }
+}

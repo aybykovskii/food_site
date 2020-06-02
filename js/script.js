@@ -57,30 +57,30 @@ document.addEventListener('DOMContentLoaded', () => {
          man.classList.remove('calculating__choose-item_active');
          woman.classList.add('calculating__choose-item_active');
          calculating();
-     })
+     });
     man.addEventListener('click',(event) => {
         woman.classList.remove('calculating__choose-item_active');
         man.classList.add('calculating__choose-item_active');
         calculating();
-    })
+    });
     height.addEventListener('click', ()=>{
         height.addEventListener('mouseout', () =>{
             console.log(height.value);
             calculating();
-        })
-    })
+        });
+    });
     weight.addEventListener('click', ()=>{
         weight.addEventListener('mouseout', () =>{
             console.log(weight.value);
             calculating();
-        })
-    })
+        });
+    });
     age.addEventListener('click', ()=>{
         age.addEventListener('mouseout', () =>{
             console.log(age.value);
             calculating();
-        })
-    })
+        });
+    });
 
     function chooseItemActive(remove1, remove2, remove3, add1){
         remove1.classList.remove('calculating__choose-item_active');
@@ -91,19 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
     low.addEventListener('click',() => {
         chooseItemActive(small, medium, high, low);
         calculating();
-    })
+    });
     small.addEventListener('click',() => {
         chooseItemActive(low, medium, high, small);
         calculating();
-    })
+    });
     medium.addEventListener('click',() => {
         chooseItemActive(low, small, high, medium);
         calculating();
-    })
+    });
     high.addEventListener('click',() => {
         chooseItemActive(low, small, medium, high);
         calculating();
-    })
+    });
 
     let calculating = function(){
     let kkal;
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         kkal  = Math.round(kkal * 1.725);
     }
     calculatingResult.textContent = `${kkal} ккал`;
-}
+    };
     }
 
 
@@ -191,21 +191,21 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             current.textContent = '0' + (1+i);
         }
-    })
+    });
     prevBtn.addEventListener('click', () => {
         let numI;
         slides.forEach((e, i) => {
             if(!e.classList.contains('hide')){
                 numI = i;
             }
-        })
+        });
         if(numI > 0){
             slides[numI].classList.add('hide');
             numI--;
             slides[numI].classList.remove('hide');
             current.textContent = `0${numI + 1}`;
         }
-    })
+    });
 
     netxBtn.addEventListener('click', () => {
         let numI;
@@ -213,19 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if(!e.classList.contains('hide')){
                 numI = i;
             }
-        })
+        });
         if(numI < 3){
             slides[numI].classList.add('hide');
             numI++;
             slides[numI].classList.remove('hide');
             current.textContent = `0${numI + 1}`;
         }
-    })
+    });
 
     const pepperBtn = document.querySelector('.pepper');
     pepperBtn.addEventListener('click', () => {
         window.scrollTo(0, 0);
-    })
+    });
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
           modal = document.querySelector('.modal');
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     modalTrigger.forEach((item) =>{
         item.addEventListener('click', openModal);
-    })
+    });
     const modatTimerId = setInterval(openModal, 15000);
     function closeModal () {
         modal.classList.remove('show');
@@ -249,13 +249,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target === modal || e.target.getAttribute('data-close') == ''){
             closeModal();
         }
-    })
+    });
 
     document.addEventListener('keydown', (e) => {
         if(e.code === "Escape" && modal.classList.contains('show')){
             closeModal();
         }
-    })
+    });
 
     function openModalByScroll () {
         if(window.pageYOffset + document.documentElement.clientHeight >= document.
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="menu__item-cost">Цена:</div>
                     <div class="menu__item-total"><span>${this.totalCoast}</span> грн/день</div>
                 </div>
-            `
+            `;
             this.parent.append(element);
         }
     }
@@ -340,13 +340,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     instBtn.addEventListener('click', ()=> {
         document.location.href = "https://www.instagram.com/vvcigy/";
-    })
+    });
 
     const footerInsBtn = document.querySelector('.footer .container .social a');
 
     footerInsBtn.addEventListener('click', () => {
         document.location.href = "https://www.instagram.com/vvcigy/";
-    })
+    });
 
     //Forms
     const forms = document.querySelectorAll('form');
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     forms.forEach(item => {
         postData(item);
-    })
+    });
 
     function postData (form) {
         form.addEventListener('submit', (e) => {
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusMessage.style.cssText = `
                 display: block;
                 margin: 0 auto;
-            `
+            `;
             form.insertAdjacentElement('afterend', statusMessage);
 
             // request.setRequestHeader('Content-type', 'application/json');
@@ -400,8 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 thanksModalShow(message.fail);
             }).finally(()=> {
                 form.reset();
-            })
-        })
+            });
+        });
     }
 
     function thanksModalShow(message) {
@@ -427,4 +427,8 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }, 4000);
     }
+
+    fetch('http://localhost:3000/menu')
+        .then(data => data.json())
+        .then(data => console.log(data));
 });
