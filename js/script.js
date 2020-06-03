@@ -454,6 +454,8 @@ document.body.onload = () => {
   //         });
   //     });
 
+  //getting data from .json
+
   axios.get("http://localhost:3000/menu").then((object) => {
     object.data.forEach(({ img, altimg, title, descr, price }) => {
       new MenuItem(
@@ -466,6 +468,15 @@ document.body.onload = () => {
       ).render();
     });
   });
+
+  //getting data from database
+  //   axios.get("http://dist/server.php").then(({ data: res }) => {
+  //     if (res.status === 200) {
+  //       res.data.forEach(({ img, title, descr, price }) => {
+  //         new MenuItem(img, "", title, descr, price, ".menu .container").render();
+  //       });
+  //     }
+  //   });
 
   //Sidepanel
   const sidePanel = document.querySelector(".sidepanel"),
