@@ -467,6 +467,7 @@ document.body.onload = () => {
     });
   });
 
+  //Sidepanel
   const sidePanel = document.querySelector(".sidepanel"),
     instBtn = sidePanel.querySelector("a");
 
