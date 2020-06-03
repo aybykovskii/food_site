@@ -134,7 +134,7 @@ a {
 .sidepanel__text span {
     display: flex;
     transform: rotate(-90deg) translateX(-50px);
-    margin-bottom: 50px
+    margin-bottom: 20px
 }
 
 .sidepanel__divider {
@@ -147,12 +147,12 @@ a {
 .sidepanel__icon {
     width: 24px;
     height: 24px;
-    margin-bottom: 50px
+    margin-bottom: 20px
 }
 
 .sidepanel__icon img {
     width: 100%;
-    margin-bottom: 50px
+    margin-bottom: 20px
 }
 
 .preview {

@@ -83,28 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function chooseItemActive(remove1, remove2, remove3, add1){
-        remove1.classList.remove('calculating__choose-item_active');
-        remove2.classList.remove('calculating__choose-item_active');
-        remove3.classList.remove('calculating__choose-item_active');
-        add1.classList.add('calculating__choose-item_active');
+        add1.addEventListener('click', ()=> {
+            remove1.classList.remove('calculating__choose-item_active');
+            remove2.classList.remove('calculating__choose-item_active');
+            remove3.classList.remove('calculating__choose-item_active');
+            add1.classList.add('calculating__choose-item_active');
+            calculating();
+        });
     }
-    low.addEventListener('click',() => {
-        chooseItemActive(small, medium, high, low);
-        calculating();
-    });
-    small.addEventListener('click',() => {
-        chooseItemActive(low, medium, high, small);
-        calculating();
-    });
-    medium.addEventListener('click',() => {
-        chooseItemActive(low, small, high, medium);
-        calculating();
-    });
-    high.addEventListener('click',() => {
-        chooseItemActive(low, small, medium, high);
-        calculating();
-    });
-
+    chooseItemActive(small, medium, high, low);
+    chooseItemActive(low, medium, high, small);
+    chooseItemActive(low, small, high, medium);
+    chooseItemActive(low, small, medium, high);
+    
     let calculating = function(){
     let kkal;
     if(woman.classList.contains('calculating__choose-item_active')){
@@ -159,16 +150,23 @@ document.addEventListener('DOMContentLoaded', () => {
         function getZero(num){
             if(num >= 0 && num < 10){
                 return `0${num}`;
-            } else return num;
+            } else {return num;}
         }
+
+    
         function updateClock() {
             const t = getTimeRemaining(endtime);
-
-            days.textContent = getZero(t.days);
-            hours.textContent = getZero(t.hours);
-            minutes.textContent = getZero(t.minutes);
-            seconds.textContent = getZero(t.seconds);
-
+            if(t.days <= 0){
+                days.textContent = getZero(0);
+                hours.textContent = getZero(0);
+                minutes.textContent = getZero(0);
+                seconds.textContent = getZero(0);
+            } else{
+                days.textContent = getZero(t.days);
+                hours.textContent = getZero(t.hours);
+                minutes.textContent = getZero(t.minutes);
+                seconds.textContent = getZero(t.seconds);
+            }
             if(t.total <= 0){
                 clearInterval(timeInterval);
             }
