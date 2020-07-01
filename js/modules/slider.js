@@ -1,17 +1,17 @@
-module.exports = function slider() {
+export default function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
   //Slider
   let offset = 0;
   let slideIndex = 1;
 
-  const slides = document.querySelectorAll('.offer__slide'),
-    slider = document.querySelector('.offer__slider'),
-    prev = document.querySelector('.offer__slider-prev'),
-    next = document.querySelector('.offer__slider-next'),
-    total = document.querySelector('#total'),
-    current = document.querySelector('#current'),
-    slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+  const slides = document.querySelectorAll(slide),
+    slider = document.querySelector(container),
+    prev = document.querySelector(prevArrow),
+    next = document.querySelector(nextArrow),
+    total = document.querySelector(totalCounter),
+    current = document.querySelector(currentCounter),
+    slidesWrapper = document.querySelector(wrapper),
     width = window.getComputedStyle(slidesWrapper).width,
-    slidesField = document.querySelector('.offer__slider-inner');
+    slidesField = document.querySelector(field);
 
   if (slides.length < 10) {
     total.textContent = `0${slides.length}`;
@@ -148,46 +148,4 @@ module.exports = function slider() {
   function deleteNotDigits(str) {
     return +str.replace(/\D/g, '');
   }
-
-  //Variant №1
-  // slides.forEach((item, i) => {
-  //     if(i!= 0){
-  //         item.classList.add('hide');
-  //     } else {
-  //         current.textContent = '0' + (1+i);
-  //     }
-  // });
-  // prevBtn.addEventListener('click', () => {
-  //     let numI;
-  //     slides.forEach((e, i) => {
-  //         if(!e.classList.contains('hide')){
-  //             numI = i;
-  //         }
-  //     });
-
-  //     slides[numI].classList.add('hide');
-  //     if(numI == 0){
-  //         numI = 4;}
-  //     numI--;
-  //     slides[numI].classList.remove('hide');
-  //     current.textContent = `0${numI + 1}`;
-
-  // });
-
-  // netxBtn.addEventListener('click', () => {
-  //     let numI;
-  //     slides.forEach((e, i) => {
-  //         if(!e.classList.contains('hide')){
-  //             numI = i;
-  //         }
-  //     });
-
-  //     slides[numI].classList.add('hide');
-  //     if(numI == 3){
-  //         numI = -1;}
-  //     numI++;
-  //     slides[numI].classList.remove('hide');
-  //     current.textContent = `0${numI + 1}`;
-
-  // });
-};
+}

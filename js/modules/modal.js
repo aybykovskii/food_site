@@ -1,32 +1,21 @@
-module.exports = function modal() {
+export default function modal(triggerSelector, modalSelector, modalTimerId) {
   // Modal Window
-  const modalTrigger = document.querySelectorAll("[data-modal]"),
-    modal = document.querySelector(".modal");
+  const modalTrigger = document.querySelectorAll(triggerSelector),
+    modal = document.querySelector(modalSelector);
 
-  function openModal() {
-    modal.classList.add("show");
-    document.body.style.overflow = "hidden";
-    clearInterval(modatTimerId);
-  }
   modalTrigger.forEach((item) => {
-    item.addEventListener("click", openModal);
+    item.addEventListener("click", () => openModal(".modal", modalTimerId));
   });
-  const modatTimerId = setInterval(openModal, 15000);
-
-  function closeModal() {
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal || e.target.getAttribute("data-close") == "") {
-      closeModal();
+      closeModal(".modal");
     }
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.code === "Escape" && modal.classList.contains("show")) {
-      closeModal();
+      closeModal(".modal");
     }
   });
 
@@ -35,9 +24,20 @@ module.exports = function modal() {
       window.pageYOffset + document.documentElement.clientHeight >=
       document.documentElement.scrollHeight
     ) {
-      openModal();
+      openModal(".modal", modalTimerId);
       window.removeEventListener("scroll", openModalByScroll);
     }
   }
   window.addEventListener("scroll", openModalByScroll);
-};
+}
+export function closeModal(modalSelector) {
+  const modal = document.querySelector(modalSelector);
+  modal.classList.remove("show");
+  document.body.style.overflow = "";
+}
+export function openModal(modalSelector, modalTimerId) {
+  const modal = document.querySelector(modalSelector);
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+  clearInterval(modalTimerId);
+}

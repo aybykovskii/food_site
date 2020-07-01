@@ -1,4 +1,4 @@
-module.exports = function calc() {
+export default function calc() {
   // Calculator
 
   const result = document.querySelector('.calculating__result span');
@@ -107,4 +107,4 @@ module.exports = function calc() {
   getDynamicInformation('#height');
   getDynamicInformation('#weight');
   getDynamicInformation('#age');
-};
+}

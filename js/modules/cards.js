@@ -1,4 +1,6 @@
-module.exports = function cards() {
+import {getResource} from '../services/services';
+
+export default function cards() {
   //Menu Csrds
   class MenuItem {
     constructor(
@@ -44,24 +46,6 @@ module.exports = function cards() {
       this.parent.append(element);
     }
   }
-  const getResource = async (url) => {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url} status: ${status}`);
-    }
-
-    return await res.json();
-  };
-
-  // getResource('http://localhost:3000/menu')
-  //     .then(data => {
-  //         data.forEach(({img, altimg, title, descr, price}) => {
-  //             new MenuItem(img, altimg, title, descr, price, '.menu .container').render();
-  //         });
-  //     });
-
-  //getting data from .json
 
   axios.get("http://localhost:3000/menu").then((object) => {
     object.data.forEach(({
@@ -81,14 +65,4 @@ module.exports = function cards() {
       ).render();
     });
   });
-
-  //getting data from database
-  //   axios.get("http://dist/server.php").then(({ data: res }) => {
-  //     if (res.status === 200) {
-  //       res.data.forEach(({ img, title, descr, price }) => {
-  //         new MenuItem(img, "", title, descr, price, ".menu .container").render();
-  //       });
-  //     }
-  //   });
-
-};
+}

@@ -1,7 +1,5 @@
-module.exports = function timer(){
+export default function timer(timerSelector, deadline, deadlineSelector){
   //Timer
-
-  const deadline = new Date("2020-06-31");
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -55,9 +53,10 @@ module.exports = function timer(){
       }
     }
   }
-  setClock(".timer", deadline);
-  const timerEndTime = document.querySelector(".deadline");
+  setClock(timerSelector, deadline);
+
+  const timerEndTime = document.querySelector(deadlineSelector);
+  let dead = new Date(deadline);
   timerEndTime.textContent =
-    `Акция закончится ${deadline.getDate()} июня ${deadline.getFullYear()} года 
-  в ${deadline.getHours()} часов 00 минут`;
-};
+    `Акция закончится ${dead.getDate()} июня ${dead.getFullYear()} года`;
+}
