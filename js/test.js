@@ -1,5 +1,19 @@
 'use strict';
 
-const now = new Date();
+class User{
+    #name = 'Alex';
+    #surname = 'Tyrickov';
 
-console.log('test output');
+    get name(){
+        return this.#name
+    }
+
+    set name(name){
+        this.#name = name;
+    }
+}
+
+let Alex = new User();
+console.log(Alex.name);
+console.log(Alex.name = 'Ivan');
+console.log(Alex.name);

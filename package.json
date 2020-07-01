@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/vvcigy/food_site#readme",
   "devDependencies": {
-    "json-server": "^0.16.1"
+    "json-server": "^0.16.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }
