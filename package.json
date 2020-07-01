@@ -12,16 +12,25 @@
   },
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    ">1%"
+  ],
   "bugs": {
     "url": "https://github.com/vvcigy/food_site/issues"
   },
   "homepage": "https://github.com/vvcigy/food_site#readme",
   "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
     "json-server": "^0.16.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.10.4",
     "axios": "^0.19.2"
   }
 }
