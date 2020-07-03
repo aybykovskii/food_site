@@ -9,9 +9,6 @@ module.exports = {
     filename: 'bundle.js',
     path: __dirname + '/public/'
   },
-  watch: true,
-
-  devtool: "source-map",
 
   module: {
     rules: [
@@ -22,7 +19,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [['@babel/preset-env', {
-                debug: true,
+                debug: false,
                 corejs: 3,
                 useBuiltIns: "usage"
             }]]
